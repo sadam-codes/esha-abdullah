@@ -3,12 +3,270 @@
 
 <head>
   <meta charset="UTF-8">
+  <title>For Esha 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+
+  <style>
+    :root {
+      --rose: #f48fb1;
+      --lavender: #cdb4db;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #fde2e4, #fae1dd);
+      transition: background 1.2s ease;
+      overflow: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      font-size: 18px;
+      animation: float 7s linear infinite;
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(110vh) scale(.9);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* Card */
+    .card {
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      width: min(92vw, 420px);
+      padding: 34px 26px;
+      border-radius: 32px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .15);
+      animation: popIn .9s ease;
+      z-index: 2;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(.85);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* 💖 NAME – BIG & ROMANTIC */
+    .name {
+      margin-bottom: 10px;
+    }
+
+    .name span {
+      display: inline-block;
+      font-size: clamp(48px, 14vw, 64px);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--rose), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: sway 4s ease-in-out infinite;
+      text-shadow: 0 6px 18px rgba(244, 143, 177, .35);
+    }
+
+    /* slight delay for each letter */
+    .name span:nth-child(2) {
+      animation-delay: .2s
+    }
+
+    .name span:nth-child(3) {
+      animation-delay: .4s
+    }
+
+    .name span:nth-child(4) {
+      animation-delay: .6s
+    }
+
+    @keyframes sway {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(-1deg);
+      }
+    }
+
+    h2 {
+      color: var(--rose);
+      margin: 18px 0 8px;
+      font-size: clamp(18px, 5vw, 22px);
+    }
+
+    p {
+      color: #666;
+      font-size: clamp(14px, 4vw, 15px);
+    }
+
+    /* Buttons */
+    .buttons {
+      margin-top: 22px;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 15px 28px;
+      font-size: 17px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: linear-gradient(135deg, #f8a1c4, #fbc2eb);
+      color: #fff;
+      animation: pulse 1.4s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.07)
+      }
+
+      100% {
+        transform: scale(1)
+      }
+    }
+
+    .no {
+      background: #f5f5f5;
+      color: #777;
+    }
+  </style>
 </head>
 
 <body>
-  Hello
+
+  <div class="card" id="card">
+    <div class="name">
+      <span>E</span><span>s</span><span>h</span><span>a</span>
+    </div>
+
+    <h2>Will you be my Valentine? 💖</h2>
+    <p>I’m asking gently and honestly 🌷</p>
+
+    <div class="buttons">
+      <button class="yes" id="yesBtn">Yes 💕</button>
+      <button class="no" id="noBtn">No 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    /* Pastel backgrounds */
+    const backgrounds = [
+      "linear-gradient(135deg,#fde2e4,#fae1dd)",
+      "linear-gradient(135deg,#e4c1f9,#f1c0e8)",
+      "linear-gradient(135deg,#d0f4de,#fcf6bd)",
+      "linear-gradient(135deg,#fbc4ab,#ffdab9)",
+      "linear-gradient(135deg,#e0fbfc,#cdb4db)"
+    ];
+
+    const noTexts = [
+      "Really? 🤔",
+      "Are you sure? 🥺",
+      "Think again 💗",
+      "Just one chance? 🌸",
+      "My heart is waiting 💖",
+      "Okay… I’ll wait 💕",
+      "I’m still here 🌷",
+      "Whenever you’re ready 🤍",
+      "No rush at all 💫",
+      "Still hoping softly 💗"
+    ];
+
+    let bgIndex = 0;
+    let noIndex = 0;
+    let accepted = false;
+
+    /* Change background on any click except YES */
+    document.body.addEventListener("click", (e) => {
+      if (accepted) return;
+      if (e.target.id === "yesBtn") return;
+
+      document.body.style.background = backgrounds[bgIndex];
+      bgIndex = (bgIndex + 1) % backgrounds.length;
+    });
+
+    /* NO button */
+    document.getElementById("noBtn").addEventListener("click", () => {
+      if (accepted) return;
+      const btn = document.getElementById("noBtn");
+      btn.style.transform = `translateX(${Math.random() * 60 - 30}px)`;
+      btn.textContent = noTexts[noIndex % noTexts.length];
+      noIndex++;
+    });
+
+    /* YES */
+    document.getElementById("yesBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      accepted = true;
+
+      document.body.style.background =
+        "linear-gradient(135deg,#f8a1c4,#fbc2eb)";
+
+      document.getElementById("card").innerHTML = `
+    <h2 style="font-size:28px;">Esha 💖</h2>
+    <p>You just made my day incredibly special 🌷</p>
+    <h2>Happy Valentine’s Day 😍</h2>
+  `;
+
+      heartBurst();
+    });
+
+    /* Hearts */
+    function createHeart() {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = "💗";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 7000);
+    }
+
+    setInterval(createHeart, 900);
+
+    function heartBurst() {
+      for (let i = 0; i < 22; i++) setTimeout(createHeart, i * 140);
+    }
+  </script>
+
 </body>
 
 </html>
